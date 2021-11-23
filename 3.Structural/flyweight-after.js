@@ -1,12 +1,17 @@
 class Task{
-    constructor(data) { // công việc khởi tạo 1 task
-        this.flyweight = FlyweightFactory.get(data.project, data.priority, data.user, data.completed);  // những thuộc tính non-unique ta sẽ reuse lại nhờ flyweight
-        this.name = data.name; // thuộc tính duy nhất unique nên ta không thể dùng flyweight để reuse được
+    constructor(data) {
+        // những thuộc tính non-unique sẽ được re-use lại nhờ flyweight
+        this.flyweight = FlyweightFactory.get(data.project, data.priority, data.user, data.completed);
+        this.name = data.name;      // thuộc tính unique nên không thể dùng flyweight để reuse được
+        // this.priority = data.priority;
+        // this.project = data.project;
+        // this.user = data.user;
+        // this.completed = data.completed;
     }
 }
 
-class Flyweight{
-    constructor(project, priority, user, completed) {   // tạo ra 1 flyweight dựa vào những thuộc tính non-unique
+class Flyweight{  // tạo ra 1 flyweight dựa vào những thuộc tính non-unique
+    constructor(project, priority, user, completed) {
         this.project = project;
         this.priority = priority;
         this.user = user;
@@ -15,8 +20,10 @@ class Flyweight{
 }
 
 let FlyweightFactory = function (){
-    let flyweights = {};    // kho chứa tập hợp các flyweight
-    // hàm này tìm kiếm trong tập flyweight dựa vào các thuộc tính truyền vào, nếu tìm thấy không tìm thấy thì thêm mới vào kho rồi trả ra flyweight tương ứng
+    let flyweights = {};    // hash map chứa các flyweight
+
+    // tìm kiếm trong flyweights dựa vào props truyền vào
+    // nếu ko tìm thấy thì thêm mới, còn ko thì trả ra flyweight tương ứng
     let get = function(project, priority, user, completed){
         if (!flyweights[project + priority + user + completed]){
             flyweights[project + priority + user + completed] = new Flyweight(project, priority, user, completed);
@@ -24,31 +31,37 @@ let FlyweightFactory = function (){
         return flyweights[project + priority + user + completed];
     };
 
-    let getCount = function (){  // hàm lấy số lượng các flyweight có trong kho
+    let getCount = function (){
         let count = 0;
         for (let f in flyweights) count++;
         return count;
-    }
+    };
 
-    return{    // module pattern
+    return {
         get: get,
         getCount: getCount
-    }
-}()
+    };
+}() // self-invoke
 
-function TaskCollection(){      // nơi lưu trữ các task (ý tưởng giống object pool pattern)
+function TaskCollection(){
     let tasks = {};
     let count = 0;
-    let add = function(data){   // hàm tạo ra 1 task từ data và lưu trữ vào tasks
-        tasks[data.name] = new Task(data)
+    let add = function(data){
+        tasks[data.name] = new Task(data);
         count += 1;
     }
 
-    let getCount = function (){ // lấy số lượng task hiện tại
+    let printAll = function () {
+        console.log(tasks['task1'])
+        console.log(tasks['task2'])
+        console.log(tasks['task3'])
+    }
+
+    let getCount = function (){
         return count;
     }
 
-    return{         // module pattern
+    return {
         add: add,
         getCount: getCount
     }

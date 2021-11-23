@@ -1,10 +1,21 @@
 // prototypes: an encapsulation of properties that an object links to
+// việc đóng gói các thuộc tính để các object sau link tới
 
 // create constructor => just create a function
 let Task = function (name){
     this.name = name;
     this.completed = false;
+
+    // thay vì viết như vậy
+    // this.complete = function () {
+    //     console.log('completing task: ' + this.name);
+    //     this.completed = true;
+    // }
+    // this.save = function () {
+    //     console.log('saving task: ' + this.name);
+    // }
 }
+
 // drawbacks của Constructor pattern là mỗi lần task mới đc tạo thì hàm complete và save lại đc tạo với ý tưởng hoạt động như nhau (tốn kém)
 // => thay vì như vậy nên tạo prototype để mỗi copy của object đó sẽ link đến (lôi complete và save ra quăng vào 1 chỗ chung)
 // => xài Prototype: ClassName.prototype.methodName = function(arguments){}

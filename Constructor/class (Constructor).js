@@ -15,8 +15,8 @@ Task.prototype.save = function () {
 
 module.exports = Task
 
-// to this
-'use strict'    // ES6
+// from this (ES6)
+'use strict'
 
 class Task {
     constructor(name) {

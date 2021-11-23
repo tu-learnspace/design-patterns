@@ -1,5 +1,5 @@
 //let Task = require('./task');
-let Task = require('./class')
+let Task = require('./class (Constructor)')
 
 let task1 = new Task('create a demo for constructors');
 let task2 = new Task('create a demo for modules');

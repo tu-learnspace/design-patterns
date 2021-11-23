@@ -1,4 +1,4 @@
-// when you use the new keyword:
+// when you use the new keyword, it means:
 // 1. create new object
 // 2. links that object to an object prototype
 // 3. binds 'this' to the new object scope
