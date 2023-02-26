@@ -8,5 +8,5 @@ They're split into 3 group:
 - Structural
 - Behavior
 
-![design-pattern-groups](6804689564_8a6ff3efff_b.jpg)
+![design-pattern-groups](img/6804689564_8a6ff3efff_b.jpg)
 
