@@ -5,7 +5,6 @@
 let Task = function (name){
     this.name = name;
     this.completed = false;
-
     // thay vì viết như vậy
     // this.complete = function () {
     //     console.log('completing task: ' + this.name);
